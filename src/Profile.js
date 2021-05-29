@@ -1,8 +1,26 @@
 
 import React, { Component } from 'react'
 
-export class Profile extends Component {
 
+export class Profile extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {date: new Date()};
+      }
+      componentDidMount() {
+        this.timerID = setInterval(
+          () => this.tick(),
+          1000
+        );
+      }
+      componentWillUnmount() {
+        clearInterval(this.timerID);
+      }
+      tick() {
+        this.setState({
+          date: new Date()
+        });
+      }
 
 
     render() {
@@ -14,7 +32,13 @@ export class Profile extends Component {
                     <li>Bio : {this.props.bio} </li>
                     <li>Profession  : {this.props.profession} </li>
                 </ul>
+                <div className="text-muted">{this.state.date.toLocaleTimeString()}</div>
+
+
+               
             </div>
+
+            
         )
     }
 }
